@@ -5,11 +5,20 @@ on:
     branches:
       - main
 
+# Explicit permissions so the workflow can push to the repository / pages branch
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # ensure the checkout step persists credentials so the GITHUB_TOKEN can be used for pushes
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
