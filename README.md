@@ -6,7 +6,7 @@ CC App renders a list of items from an API and allows performing a search over t
 
 🔗 Live demo: https://pierfrancesco.github.io/cc-app/
 
-![img.png](img.png)
+![Hero screenshot](README-images/readme-hero.png)
 
 ## 📁 Quick project structure
 
@@ -92,13 +92,21 @@ Notes:
 ## ✨ Features
 
 - Product grid rendering with responsive layout and lazy loading of images.
-![img_1.png](img_1.png)
+
+![Grid screenshot](README-images/readme-grid.png)
+
 - Search input with debounced filtering.
-![img_2.png](img_2.png)
+
+![Search screenshot](README-images/readme-search.png)
+
 - Client-side routing using URL hash (search state in the URL).
-![img_3.png](img_3.png)
+
+![Routing screenshot](README-images/readme-routing.png)
+
 - Product detail modal with nested dropdowns for product attributes.
-![img_5.png](img_5.png)
+
+![Modal screenshot](README-images/readme-modal.png)
+
 - Simple client-side store with subscription model.
 - Error handling for API requests.
 - Modular TypeScript codebase with clear separation of concerns.
