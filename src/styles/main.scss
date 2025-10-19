@@ -1,0 +1,15 @@
+/*
+ * SCSS Main Entry Point
+ * This file imports all abstract definitions, base styles, and component styles.
+ */
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+@import './base/reset';
+
+@import './layout';
+
+// Component styles now live next to their TS components
+@import '../components/ProductCard/ProductCard';
+@import '../components/Modal/Modal';
+@import '../components/NestedDropdown/NestedDropdown';

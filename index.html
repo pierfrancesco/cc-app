@@ -1,0 +1,185 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* Styles to support the persistent loading skeleton */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #f4f4f5;
+        }
+
+        .loading-skeleton {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 200px);
+            gap: 3rem;
+            padding: 3rem 3rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        /* Basic skeleton card */
+        .skeleton-card {
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            gap: 0.75rem;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 220px;
+            width: 240px;
+            overflow: hidden;
+        }
+
+        /* Image placeholder */
+        .skeleton-image {
+            height: 250px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.04) 25%, rgba(0, 0, 0, 0.06) 37%, rgba(0, 0, 0, 0.04) 63%);
+            background-size: 400% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+
+        /* Shimmer animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -400% 0;
+            }
+            100% {
+                background-position: 400% 0;
+            }
+        }
+
+        /* Search input styles */
+        .search-wrapper {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 2rem 0.75rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Catalog header styles */
+        .catalog-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .catalog-header h1 {
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+        }
+
+        /*Hide empty state and error state*/
+        .empty-state, .error-state {
+            display: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC APP</title>
+</head>
+<body>
+<!-- Catalog header with search input -->
+<header class="catalog-header">
+    <div class="search-wrapper">
+        <input id="product-search" class="search-input" type="search" placeholder="Search by name or IBU" aria-label="Search products">
+    </div>
+</header>
+
+<!-- Persistent loading skeleton - always present in the HTML -->
+<div id="loading-skeleton" class="loading-skeleton" aria-hidden="true">
+    <!-- Repeat skeleton items; number can be tuned for visual density -->
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+    <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+    </div>
+</div>
+
+<!-- Empty state container -->
+<div id="empty-state" class="empty-state" aria-hidden="true" role="status" aria-live="polite">
+    <div class="empty-content">
+        <h2>No items found</h2>
+        <p>There are no products to display right now.</p>
+    </div>
+</div>
+
+<!-- Error state container -->
+<div id="error-state" class="error-state" aria-hidden="true" role="alert" aria-live="assertive">
+    <div class="error-content">
+        <h2>Something went wrong</h2>
+        <p class="error-text"></p>
+    </div>
+</div>
+
+<!-- Main application mount point -->
+<div id="app">
+    <main class="catalog-main">
+        <div id="product-grid" class="product-grid"></div>
+    </main>
+</div>
+
+<!-- Static modal container (expected by Modal.ts) -->
+<div id="product-modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content-area">
+        <!-- Optional: you can include a close button here if you prefer markup over JS creation -->
+        <div class="modal-body"><!-- populated by Modal.show --></div>
+    </div>
+</div>
+
+<!-- The main application script -->
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

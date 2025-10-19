@@ -1,0 +1,26 @@
+// src/components/ProductCard/ProductCard.scss
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: $grid-card-height;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.ibu-low { background-color: var(--color-ibu-low, #f0fdf4); }
+.ibu-medium { background-color: var(--color-ibu-medium, #fffbeb); }
+.ibu-high { background-color: var(--color-ibu-high, #fef2f2); }
+.ibu-very-high { background-color: var(--color-ibu-very-high, #fef3c7); }
+
+.card-image-wrapper { position: relative; height: 250px; margin: 5px; object-fit: contain; overflow: hidden; flex-shrink: 0; background-color: rgba(255,255,255,1); display:flex; align-items:center; justify-content:center; }
+.abv-badge { position:absolute; right:0; padding-top:15px; padding-right:3px; width:80px; height:80px; background:var(--color-secondary,#fcd34d); color:var(--color-white,#1f2937); clip-path: polygon(100% 0, 0 0, 100% 100%); display:flex; align-items:start; justify-content:end; font-weight:500; font-size:1.1rem; line-height:1; box-shadow:$shadow-sm; z-index:2; border-top-right-radius:6px; }
+.ibu-badge { position:absolute; left:0; bottom:0; background:var(--color-primary,#1e3a8a); color:var(--color-text-light,#ffffff); padding:6px 10px; font-weight:700; font-size:0.85rem; line-height:1; display:flex; align-items:center; gap:6px; box-shadow:$shadow-sm; z-index:2; }
+.spec-label { opacity:0.85; font-weight:600; font-size:0.75rem; }
+.spec-value { font-weight:800; font-size:0.9rem; }
+.card-image { padding:10px; height:100%; }
+.card-content { display:flex; align-items:center; justify-content:center; flex-direction:column; min-height:70px; flex-grow:1; color:var(--color-primary-dark); }
+

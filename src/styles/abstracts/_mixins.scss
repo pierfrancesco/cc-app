@@ -1,0 +1,39 @@
+/**
+ * SCSS MIXINS for Responsive Design
+ */
+
+// Define breakpoints
+$breakpoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+);
+
+// Responsive mixin
+@mixin screen($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media (min-width: #{map-get($breakpoints, $size)}) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$size}' not found in $breakpoints map.";
+  }
+}
+
+// Down (max-width) mixin - uses breakpoint - 1px to avoid overlap with min-width rules
+@mixin screen-down($size) {
+  @if map-has-key($breakpoints, $size) {
+    $bp: map-get($breakpoints, $size);
+    @media (max-width: #{ $bp - 1px }) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$size}' not found in $breakpoints map.";
+  }
+}
+
+@mixin button-style($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+}

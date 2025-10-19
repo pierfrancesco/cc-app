@@ -1,0 +1,283 @@
+// src/components/Modal/Modal.scss
+
+@import '../../styles/abstracts/_mixins';
+
+.modal-overlay,
+#product-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  z-index: 1000;
+  overflow-y: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.is-visible,
+#product-modal-overlay.is-visible {
+  display: flex;
+}
+
+.modal-overlay.hidden,
+#product-modal-overlay.hidden {
+  display: none !important;
+}
+
+.modal-content-area {
+  background-color: var(--color-surface, #fff);
+  color: var(--color-text, #1f2937);
+  width: 75%;
+  height: 500px;
+  max-width: 900px;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+  position: relative;
+  z-index: 1001;
+  box-sizing: border-box;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: -44px;
+  right: -44px;
+  background: var(--color-white, #fff);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: var(--color-text, #1f2937);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1002;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.30);
+  color: var(--color-primary, #00a56c);
+}
+
+.modal-body {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.modal-left {
+  height: 100%;
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  gap: 12px;
+  align-items: center;
+}
+
+.modal-image-circle {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: visible;
+  position: relative;
+  background-color: var(--color-surface, #f6f6f7);
+  border: 4px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-22%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Ensure modal circle respects IBU classes */
+.modal-image-circle.ibu-low {
+  background-color: var(--color-ibu-low, #f0fdf4);
+}
+
+.modal-image-circle.ibu-medium {
+  background-color: var(--color-ibu-medium, #fffbeb);
+}
+
+.modal-image-circle.ibu-high {
+  background-color: var(--color-ibu-high, #fef2f2);
+}
+
+.modal-image-circle.ibu-very-high {
+  background-color: var(--color-ibu-very-high, #fef3c7);
+}
+
+/* New inner circle that sits between the outer circle and the image.
+   Use this when you want the outer circle and the image background to differ. */
+.modal-image-inner {
+  width: 95%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: var(--color-image-bg, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.modal-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: 50%;
+  background-color: gainsboro;
+}
+
+.modal-ibu {
+  /* Rectangle badge with two lines: label (IBU) above the value */
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  min-height: 48px;
+  padding: 6px 8px;
+  background: var(--color-primary, #00a56c); /* green from palette */
+  color: var(--color-text-light, #ffffff);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  z-index: 3;
+}
+
+.modal-ibu .ibu-label {
+  font-size: 0.65rem;
+  opacity: 0.95;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.modal-ibu .ibu-value {
+  margin-top: 2px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.modal-abv {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-secondary, #D17229FF); /* orange */
+  color: var(--color-text-light, #ffffff);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  z-index: 3;
+}
+
+.modal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  z-index: 30;
+  background: var(--color-surface, #fff);
+  padding: 6px 10px;
+  border-radius: 8px;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.modal-right {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 24px;
+}
+
+.modal-right-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@include screen-down(lg) {
+  .modal-image-circle {
+    transform: translateY(-18%);
+  }
+}
+
+@include screen-down(md) {
+  .modal-content-area {
+    padding: 16px;
+  }
+  .modal-body {
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal-left, .modal-right {
+    width: 100%;
+    flex: 0;
+    align-items: center;
+  }
+  .modal-image-circle {
+    max-width: 320px;
+    transform: translateY(-14%);
+  }
+  .modal-product-image {
+    height: 100%;
+  }
+  .modal-ibu {
+    left: 8px;
+  }
+  .modal-abv {
+    bottom: 8px;
+  }
+  .modal-close-button {
+    top: -14px;
+    right: -14px;
+    width: 38px;
+    height: 38px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  }
+  .modal-title {
+    bottom: 45%;
+  }
+}

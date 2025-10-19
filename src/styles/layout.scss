@@ -1,0 +1,70 @@
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  width: 100%;
+  max-width: $max-content-width;
+  margin: 0 auto;
+  padding: $mobile-padding;
+  flex-grow: 1;
+
+  @include screen(sm) {
+    padding: $desktop-padding;
+  }
+}
+
+/* Empty and error states */
+.empty-state, .error-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin: 1rem 3rem;
+  border-radius: 8px;
+  box-shadow: $shadow-sm;
+  background-color: var(--color-surface);
+  color: $color-text;
+  text-align: center;
+}
+
+.empty-state .empty-content h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.empty-state .empty-content p {
+  margin: 0;
+  color: lighten($color-text, 20%);
+}
+
+.error-state {
+  border: 1px solid rgba(220, 38, 38, 0.12);
+  background-color: mix(#fff, #fee2e2, 95%);
+}
+
+.error-state .error-content h2 {
+  margin: 0 0 0.5rem 0;
+  color: #b91c1c;
+}
+
+.error-state .error-content .error-text {
+  margin: 0;
+  color: #7f1d1d;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(
+        auto-fit,
+                  minmax($grid-min-card-width, $grid-max-card-width),
+    );
+
+  gap: 2rem;
+  padding: 1rem 3rem;
+}
